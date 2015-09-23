@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cd /home/pbontrag/repos/wifi-native
+make clean
+cd ..
+tar cvzf wfn.tar.gz wifi-native/
+scp wfn.tar.gz app@tizenvtc:
+ssh app@tizenvtc /home/app/make_sense_vtc

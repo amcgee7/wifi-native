@@ -1,35 +1,80 @@
-<html>
-<head>
-</head>
+<article id="wifi-page" class="tabs WifiPage">
+    <header>
+        <nav id="wifi-nav">
+            <ul>
+                <li>
+                    <button id="wifiBackArrow" class="settings-back-arrow"></button>
+                </li>
+                <li>
+                    <button class="blue-caption-text">SETTINGS</button>
+                </li>
+                <li>
+                    <button class="component-title">WIFI</button>
+                </li>
+                <li>
+                    <button class="settings-clear"></button>
+                </li>
+            </ul>
+        </nav>
+        <div class="powerButtonContainer">
+            <!-- TODO: add the markup for a css power switch control -->
+        </div>
+        <div class="component-subhead border">
+            <!-- TODO: make this the available wifi connections notification center -->
+        </div>
+    </header>
 
-<body>
-<h2>Wifi</h2>
+    <template id="newtwork-element">
+        <li class="networkElement">
+            <h3 class="networkName"></h3>
+            <p class="signal">Signal: <span class="signal-strength"></span></p>
+            <p class="encryption">Encryption: <span class="encryption-type"></span></p>
+            <p class="security">Security: span.security-type</p>
+            <p class="connectivity-status">NO INTERNET ACCESS</p>
+        </li>
+        <li class="network-element-buttons button-container">
+            <button data-method="connect-to-network">CONNECT</button>
+            <button class="button-gree hidden">DISCONNECT</button>
+        </li>
+    </template>
 
-</body>
+    <section class="component-content">
+        <ul id="wifi-networks"></ul>
+        <div class="buttonsArea">
+            <div id="wifiRefreshButton" class="networkRefreshButton"></div>
+            <div id="addNetworkButton" class="addNetworkButton"></div>
+        </div>
+    </section>
 
-<script>
-WifiSettings = function() {
-    self = this;
-    self.wifi = {};
-    self.networks = [];
-
-    this.connect = function() {
-        tizen.wifi.connect();
-    }
-
-    this.scan = function() {
-        tizen.wifi.scan();
-    }
-
-}
-
-wifiInit = function() {
-    Wifi = {};
-    w = new WifiSettings();
-    connect = w.connect();
-}
-
-</script>
-
-</html>
-
+    <section id="add-network-modal" class="modal hidden">
+        <div class="modal-bkgrnd box-out-orange">
+            <button class="close-button" data-modaltoclose="network"></button>
+            <h2>Add A Network</h2>
+            <form id="add-network">
+                <fieldset>
+                    <ul>
+                        <li class="input-group">
+                            <label for="ssid">SSID</label>
+                            <input class="text-input input-white" type="text" name="ssid" data-required="yes" data-title="You must enter the network name (ssid)" placeholder="Name of network" autocorrect="off" autocapitalize="none">
+                            <button class="delete-button" type="reset" data-method="reset-field" data-elementtoreset="ssid"></button>
+                        </li>
+                        <li class="input-group network-security-options">
+                            <input type="radio" name="no-security">
+                            <input type="radio" name="wep">
+                            <input type="radio" name="wpa">
+                            <input type="radio" name="wpa2">
+                        </li>
+                        <li class="input-group network-security-password-container">
+                            <label for="password" class="network-security-type-name"></label>
+                            <input type="password" autocapitalize="off" autocorrect="none" data-required="yes" data-title="Please enter your password.">
+                            <button class="delete-button" type="reset" data-method="reset-field" data-elementtoreset="network-security-password"></button>
+                        </li>
+                        <li class="input-group center">
+                            <button class="no-margin" data-method="add-network">Add</button>
+                        </li>
+                    </ul>
+                </fieldset>
+            </form>
+        </div>
+    </section>
+</article>

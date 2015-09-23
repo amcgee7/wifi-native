@@ -1,8 +1,8 @@
-LIB			= 	libwifi_extension
+LIB			= 	libtizen_wifi
 CXXFLAGS	=	-O -g -I./ $(shell pkg-config --cflags dbus-1) $(shell pkg-config --cflags gio-2.0) -std=c++11 \
 				-fpermissive -fPIC
 #LDFLAGS		=	-Wl,--whole-archive gdbus/libgdbus.a build/libwifi_extension.a -Wl,--no-whole-archive
-LDFLAGS		=	-Wl,--whole-archive build/libwifi_extension.a -Wl,--no-whole-archive \
+LDFLAGS		=	-Wl,--whole-archive build/libtizen_wifi.a -Wl,--no-whole-archive \
 				-shared -Wl,-soname,$(LIB).so -o $(LIB).so -g \
 				$(shell pkg-config --libs dbus-1) $(shell pkg-config --libs gio-2.0)
 SOURCES		=	src/wifi_extension.cpp src/wifi_instance.cpp src/wifi_api.cpp common/extension.cpp

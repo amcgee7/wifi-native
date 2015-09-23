@@ -233,6 +233,7 @@ WifiInstance::OnTechnologyProxyCreated( GObject*, GAsyncResult* result )
 void
 WifiInstance::HandleMessage( const char* message )
 {
+
     picojson::value v;
     string error;
     picojson::parse( v, message, message + strlen( message ), &error );
@@ -243,12 +244,14 @@ WifiInstance::HandleMessage( const char* message )
     }
 
     string command = v.get( "cmd" ).to_str();
+
+
     if ( command == kCmdActivate )
         HandleActivate( v );
     else if ( command == kCmdDeactivate )
         HandleDeactivate( v );
     else if ( command == kCmdScan )
-        HandleDeactivate( v );
+        HandleScan( v );
     else if ( command == kCmdConnect )
         HandleConnect( v );
     else if ( command == kCmdDisconnect )
@@ -268,7 +271,17 @@ WifiInstance::HandleSyncMessage( const char* message )
     }
 
     string command = v.get( "cmd" ).to_str();
-    if ( command == kCmdGetServices )
+    if ( command == kCmdActivate )
+        HandleActivate( v );
+    else if ( command == kCmdDeactivate )
+        HandleDeactivate( v );
+    else if ( command == kCmdScan )
+        HandleScan( v );
+    else if ( command == kCmdConnect )
+        HandleConnect( v );
+    else if ( command == kCmdDisconnect )
+        HandleDisconnect( v );
+    else if ( command == kCmdGetServices )
         HandleGetServices( v );
 }
 
@@ -479,4 +492,3 @@ WifiInstance::InternalSetSyncReply( picojson::value v )
     SendSyncReply( v.serialize().c_str() );
     FlushPendingMessages();
 }
-

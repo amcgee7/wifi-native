@@ -1,0 +1,11 @@
+#!/bin/sh
+
+rm wfn.tar.gz
+rm -rf wifi-native
+tar xvzf wfn.tar.gz
+cd ./wifi-native/
+make
+sudo cp libtizen_wifi.so /usr/lib/tizen-extensions-crosswalk/
+pkill xwalk
+sleep 5
+app_launcher -s JLRPOCX001.HomeScreen -d
